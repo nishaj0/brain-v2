@@ -80,6 +80,10 @@ const clean = (s) => String(s)
   .replace(/<\/?pasted_content[^>]*>/g, '')
   .replace(/<command-[a-z]+>[\s\S]*?<\/command-[a-z]+>/g, '')
   .replace(/<(task-notification|local-command-[a-z]+)>[\s\S]*?<\/\1>/g, '')
+  // Secrets pasted into chats must not reach the model or ~/.brain.
+  .replace(/\b(?:sk|pk|rk)[-_][A-Za-z0-9_-]{16,}|\bgh[pousr]_[A-Za-z0-9]{20,}|\bxox[abpr]-[A-Za-z0-9-]{10,}|\bAKIA[0-9A-Z]{16}\b|\bAIza[0-9A-Za-z_-]{30,}|\beyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}/g, '[REDACTED]')
+  .replace(/((?:password|passwd|secret|token|api[_ -]?key)\s*[:=]\s*)\S+/gi, '$1[REDACTED]')
+  .replace(/(app ?password[^\n]{0,40}?)\b[a-z]{4} ?[a-z]{4} ?[a-z]{4} ?[a-z]{4}\b/gi, '$1[REDACTED]')
   .replace(/\s+/g, ' ').trim();
 const cut = (s, n) => (s.length > n ? s.slice(0, n - 1) + '…' : s);
 const textOf = (content) => typeof content === 'string' ? content

@@ -47,6 +47,12 @@ assert.equal(d.minutes, 10); // 3 + 5 (60-min gap capped) + 2
 const txt = b.renderDigest('proj', d, '');
 assert.ok(txt.length < 1000 && !txt.includes('noise') && !txt.includes('subagent'));
 
+// secrets in prompts are redacted before the model sees them, normal 4-word phrases are not
+const s = b.digestRecords([{ type: 'user', timestamp: at(0), cwd, message: { content:
+  'my gmail app password is abcd efgh ijkl mnop and key sk-ant-api03-AAAAAAAAAAAAAAAAAAAA, PASSWORD=hunter2, form that adds rows' } }]);
+assert.doesNotMatch(s.prompts[0], /abcd efgh|sk-ant|hunter2/);
+assert.match(s.prompts[0], /form that adds rows/);
+
 // model output is coerced to the card shape and limits
 const n = b.normalizeUpdate({ did: 'x', next: ['1', '2', '3', '4', '5', '6', 7, ''], mood: 'weird' });
 assert.equal(n.next.length, 5);
