@@ -31,6 +31,8 @@ Every model call is logged with its tokens and cost in `~/.brain/brain.log`.
 
 ## Install
 
+Needs Node.js 18+ and Claude Code. Clone this repo, then:
+
 ```powershell
 claude plugin marketplace add D:\MyProjects\brain-v2
 claude plugin install brain@brain-local
