@@ -34,11 +34,11 @@ Every model call is logged with its tokens and cost in `~/.brain/brain.log`.
 Needs Node.js 18+ and Claude Code. Clone this repo, then:
 
 ```powershell
-claude plugin marketplace add D:\MyProjects\brain-v2
+claude plugin marketplace add C:\path\to\brain-v2
 claude plugin install brain@brain-local
 ```
 
-Then restart Claude Code. To try it without installing: `claude --plugin-dir D:\MyProjects\brain-v2`.
+Then restart Claude Code. To try it without installing: `claude --plugin-dir C:\path\to\brain-v2`.
 
 ## Use
 
@@ -48,7 +48,7 @@ In any Claude session: `/brain:brain` (today), `/brain:brain now` (refresh), `/b
 Or from a terminal:
 
 ```powershell
-node D:\MyProjects\brain-v2\bin\brain.mjs status
+node C:\path\to\brain-v2\bin\brain.mjs status
 ```
 
 | Command | Model call |
@@ -65,11 +65,11 @@ node D:\MyProjects\brain-v2\bin\brain.mjs status
 Daily at 08:00 and weekly on Friday at 18:00, via Windows Task Scheduler:
 
 ```powershell
-schtasks /Create /SC DAILY /ST 08:00 /TN "brain daily" /TR "node D:\MyProjects\brain-v2\bin\brain.mjs daily"
+schtasks /Create /SC DAILY /ST 08:00 /TN "brain daily" /TR "node C:\path\to\brain-v2\bin\brain.mjs daily"
 ```
 
 ```powershell
-schtasks /Create /SC WEEKLY /D FRI /ST 18:00 /TN "brain week" /TR "node D:\MyProjects\brain-v2\bin\brain.mjs week"
+schtasks /Create /SC WEEKLY /D FRI /ST 18:00 /TN "brain week" /TR "node C:\path\to\brain-v2\bin\brain.mjs week"
 ```
 
 Reports land in `~/.brain/reports/`.
@@ -108,5 +108,5 @@ and leave no transcript behind.
 ## Test
 
 ```powershell
-node D:\MyProjects\brain-v2\test\selfcheck.mjs
+node C:\path\to\brain-v2\test\selfcheck.mjs
 ```
