@@ -264,6 +264,8 @@ export function capture(transcript, sessionId = path.basename(transcript, '.json
     const current = { next: card.next, waiting_on_you: card.waiting_on_you, claude_can_do: card.claude_can_do, broken: card.broken };
     const prompt = `CURRENT CARD:\n${JSON.stringify(current)}\n\nDIGEST:\n${renderDigest(proj.name, d, gitSummary(proj.root, d.firstTs))}`;
     const u = normalizeUpdate(callClaude({ model: MODELS.capture, system: CAPTURE_SYSTEM, prompt, json: true }));
+    // Haiku occasionally leaves did blank; fall back to Claude's own last reply so the event is never empty.
+    if (!u.did) u.did = cut(d.replies.at(-1) || d.prompts.at(-1) || '(no summary)', 300);
     // An older session (caught up late) adds its event and decisions but must not overwrite newer card state.
     const older = card.last_touched && base.ts < card.last_touched;
     const state = older ? card : u;
