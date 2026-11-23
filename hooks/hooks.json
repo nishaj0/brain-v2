@@ -1,0 +1,11 @@
+{
+  "description": "brain: capture each session in the background when it ends or is about to compact",
+  "hooks": {
+    "SessionEnd": [
+      { "hooks": [ { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/bin/brain.mjs\" hook", "timeout": 10 } ] }
+    ],
+    "PreCompact": [
+      { "hooks": [ { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/bin/brain.mjs\" hook", "timeout": 10 } ] }
+    ]
+  }
+}

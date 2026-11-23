@@ -1,0 +1,11 @@
+{
+  "name": "brain-local",
+  "owner": { "name": "local" },
+  "plugins": [
+    {
+      "name": "brain",
+      "source": "./",
+      "description": "Local progress tracker for your Claude Code projects."
+    }
+  ]
+}
