@@ -207,7 +207,7 @@ export function normalizeUpdate(u) {
 const CAPTURE_SYSTEM = `You keep a one-person developer's project tracker up to date.
 You get the project's CURRENT CARD and a trimmed DIGEST of one coding session with Claude.
 Return the UPDATED card as a JSON object with keys did, next, waiting_on_you, claude_can_do, broken, decisions, mood:
-- did: 1-2 plain sentences, what actually got done this session (not what was discussed).
+- did: REQUIRED, never empty. 1-2 plain sentences, what actually got done this session (not what was discussed).
 - next: up to 5 concrete next steps for the project. Drop steps that are done, keep still-valid old ones.
 - waiting_on_you: things only the human can do (decide, approve, pay, test by hand, create accounts, send ids).
 - claude_can_do: work Claude could do next without the human.
